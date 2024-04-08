@@ -12,6 +12,13 @@ app.get('/ping', (req, res) => {
   });
 });
 
+app.all('*', (req, res) => {
+  res.status(httpStatus.NOT_FOUND).send({
+    code: httpStatus.NOT_FOUND,
+    message: 'Not found',
+  });
+});
+
 app.listen(env.port, () => {
   console.log(`Service running on port ${env.port}`);
 });
