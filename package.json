@@ -1,0 +1,15 @@
+{
+  "name": "haui-food-mailer",
+  "version": "1.0.0",
+  "description": "Service send email for system HaUI Food",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "nodemon ./src/server.js"
+  },
+  "author": "hauifood.com",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  }
+}
