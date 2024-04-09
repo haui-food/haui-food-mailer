@@ -2,6 +2,8 @@ const express = require('express');
 const httpStatus = require('http-status');
 
 const { env } = require('./config');
+const { QUEUE_TYPES } = require('./constans');
+const { mailService, rabbitmqService } = require('./services');
 
 const app = express();
 
@@ -17,6 +19,10 @@ app.all('*', (req, res) => {
     code: httpStatus.NOT_FOUND,
     message: 'Not found',
   });
+});
+
+rabbitmqService.resovleQueue(QUEUE_TYPES.EMAIL_QUEUE, async (data) => {
+  await mailService.sendEmail(data);
 });
 
 app.listen(env.port, () => {
