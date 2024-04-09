@@ -1,25 +1,13 @@
 const express = require('express');
-const httpStatus = require('http-status');
 
 const { env } = require('./config');
+const { baseRoute } = require('./routes');
 const { QUEUE_TYPES } = require('./constans');
 const { mailService, rabbitmqService } = require('./services');
 
 const app = express();
 
-app.get('/ping', (req, res) => {
-  res.send({
-    code: httpStatus.OK,
-    message: 'Service mailer is running',
-  });
-});
-
-app.all('*', (req, res) => {
-  res.status(httpStatus.NOT_FOUND).send({
-    code: httpStatus.NOT_FOUND,
-    message: 'Not found',
-  });
-});
+app.use('/', baseRoute);
 
 rabbitmqService.resovleQueue(QUEUE_TYPES.EMAIL_QUEUE, async (data) => {
   await mailService.sendEmail(data);
