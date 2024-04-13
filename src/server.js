@@ -10,7 +10,8 @@ const app = express();
 app.use('/', baseRoute);
 
 rabbitmqService.resovleQueue(QUEUE_TYPES.EMAIL_QUEUE, async (data) => {
-  await mailService.sendEmail(data);
+  const { emailData, type } = data;
+  await mailService.sendEmailWithTemplate(emailData, type);
 });
 
 app.listen(env.port, () => {

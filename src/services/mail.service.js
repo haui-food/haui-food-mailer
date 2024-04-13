@@ -1,3 +1,5 @@
+const ejs = require('ejs');
+const path = require('path');
 const nodemailer = require('nodemailer');
 
 const { env } = require('../config');
@@ -20,6 +22,13 @@ const sendEmail = async (options) => {
   await transport.sendMail(message);
 };
 
+const sendEmailWithTemplate = async (data, type) => {
+  const html = await ejs.renderFile(path.join(__dirname, '..', 'templates', `${type}.ejs`), data);
+  const options = { ...data, html };
+  await sendEmail(options);
+};
+
 module.exports = {
   sendEmail,
+  sendEmailWithTemplate,
 };
