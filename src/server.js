@@ -7,6 +7,8 @@ const { mailService, rabbitmqService } = require('./services');
 
 const app = express();
 
+app.use(express.json());
+
 app.use('/', baseRoute);
 
 rabbitmqService.resovleQueue(QUEUE_TYPES.EMAIL_QUEUE, async (data) => {
