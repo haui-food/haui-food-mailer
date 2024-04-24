@@ -12,7 +12,7 @@ transport
 
 const sendEmail = async (options) => {
   const message = {
-    from: `no-reply <${env.email.from}>`,
+    from: `HaUI Food <${env.email.from}>`,
     to: options.emails,
     subject: options.subject,
     html: options.html,
@@ -23,7 +23,8 @@ const sendEmail = async (options) => {
 };
 
 const sendEmailWithTemplate = async (data, type) => {
-  const html = await ejs.renderFile(path.join(__dirname, '..', 'templates', `${type}.ejs`), data);
+  console.log('Đã nhận queue');
+  const html = await ejs.renderFile(path.join(__dirname, '..', 'templates', `${type}.ejs`), { data });
   const options = { ...data, html };
   await sendEmail(options);
 };
