@@ -6,7 +6,7 @@ const { mailService } = require('../services');
 
 const baseRoute = express.Router();
 
-baseRoute.get('/ping', (req, res) => {
+baseRoute.get('/', (req, res) => {
   res.send({
     code: httpStatus.OK,
     message: 'Service mailer is running',
