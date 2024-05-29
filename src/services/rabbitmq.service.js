@@ -1,12 +1,12 @@
 const amqp = require('amqplib');
 
-const { env } = require('../config');
+const { rabbitmq } = require('../config');
 
 class RabbitMQService {
   channel;
 
   async createChannel() {
-    const connection = await amqp.connect(env.rabbitmqURI);
+    const connection = await amqp.connect(rabbitmq.uri);
     this.channel = await connection.createChannel();
   }
 
@@ -31,6 +31,4 @@ class RabbitMQService {
   }
 }
 
-const rabbitmqService = new RabbitMQService();
-
-module.exports = rabbitmqService;
+module.exports = new RabbitMQService();

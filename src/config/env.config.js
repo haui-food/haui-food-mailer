@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const env = {
   port: process.env.PORT || 3000,
-  rabbitmqURI: process.env.RABBITMQ_URI,
   apiKey: process.env.API_KEY,
   email: {
     smtp: {
