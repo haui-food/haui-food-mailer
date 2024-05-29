@@ -1,6 +1,7 @@
 const express = require('express');
 const httpStatus = require('http-status');
 
+const authApiKey = require('../middlewares');
 const { mailService } = require('../services');
 
 const baseRoute = express.Router();
@@ -12,7 +13,7 @@ baseRoute.get('/ping', (req, res) => {
   });
 });
 
-baseRoute.post('/send-mail', async (req, res) => {
+baseRoute.post('/send-mail', authApiKey, async (req, res) => {
   const { emailData, type } = req.body;
   await mailService.sendEmailWithTemplate(emailData, type);
   res.send({
